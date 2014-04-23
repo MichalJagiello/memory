@@ -14,15 +14,6 @@ BuildRequires:  pkgconfig(eet)
 BuildRequires:  pkgconfig(edje)
 BuildRequires:  cmake
 BuildRequires:  libopenssl
-BuildRequires:	glib2
-BuildRequires:	liblua-devel
-BuildRequires:	expat
-BuildRequires:	ncurses
-BuildRequires:	mpfr
-BuildRequires:	cloog-ppl
-BuildRequires:	gmp
-BuildRequires:	libx11-devel
-BuildRequires:	xproto
 
 %description
 Shortcut framework description
