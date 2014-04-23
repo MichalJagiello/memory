@@ -1,0 +1,69 @@
+%define AppInstallPath /usr/apps/%{name}
+%define Exec notifier
+
+Name:       org.tizen.shortcuts
+Summary:    Empty app
+Version:    0.0.1
+Release:    1
+License:    Apache-2.0
+Source0:    %{name}-%{version}.tar.gz
+
+BuildRequires:  pkgconfig(appcore-efl)
+BuildRequires:  pkgconfig(eldbus)
+BuildRequires:  pkgconfig(ecore)
+BuildRequires:  pkgconfig(eina)
+BuildRequires:  pkgconfig(evas)
+BuildRequires:  pkgconfig(ecore-x)
+BuildRequires:  cmake
+BuildRequires:  python-setuptools
+BuildRequires:  python
+BuildRequires:  python-sqlite
+
+%description
+Shortcut framework description
+
+
+%package daemon
+Summary: Shortcut description
+Group: System/Libraries
+%description daemon
+Shortcut is a set of deamons providing utilities for detectd and repeat user
+interactions with Accessible applications (AT-SPI2).
+
+%package notifier
+Summary: Shortcut sample client
+Group: System/Libraries
+%description notifier
+Shortcut sample client
+
+%prep
+%setup -q
+
+%build
+cd Shortcut-Notifier/
+cmake . -DCMAKE_INSTALL_PREFIX="%{AppInstallPath}" -DCMAKE_TARGET="%{Exec}" -DCMAKE_PACKAGE="%{name}"
+make %{?jobs:-j%jobs}
+cd ../shortcutd/
+CFLAGS="%{optflags}" python setup.py build
+
+%install
+cd Shortcut-Notifier/
+rm -rf %{buildroot}
+%make_install
+cd ../shortcutd/
+PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages BUILDROOT=%{buildroot} python setup.py install --prefix=%{_prefix} --root=%{buildroot}
+
+%files daemon
+%{python_sitearch}/*
+/usr/bin/shortcutd.py
+
+%config
+/etc/shortcuts/shortcut.conf
+
+%files notifier 
+%{AppInstallPath}/bin/notifier
+%{AppInstallPath}/res/icons/*.png
+%{AppInstallPath}/res/*.edj
+%{AppInstallPath}/res/images/*.png
+%{AppInstallPath}/res/images/*.jpg
+/opt/share/packages/org.tizen.notifier.xml
