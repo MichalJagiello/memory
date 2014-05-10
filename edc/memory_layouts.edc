@@ -1,0 +1,8 @@
+collections {
+
+	#include "button.edc"
+	#include "game_grid.edc"
+	#include "highscore_menu.edc"
+	#include "main_menu.edc"
+
+}

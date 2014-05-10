@@ -32,12 +32,22 @@ ELSE()
 ENDIF(EDJE_CC_EXECUTABLE)
 
 
-EDJ_TARGET(game_grid.edj
-	${CMAKE_SOURCE_DIR}/edc/game_grid.edc
-	${CMAKE_BINARY_DIR}/res
-)
+#EDJ_TARGET(game_grid.edj
+#	${CMAKE_SOURCE_DIR}/edc/game_grid.edc
+#	${CMAKE_BINARY_DIR}/res
+#)
+#
+#EDJ_TARGET(main_menu.edj
+#	${CMAKE_SOURCE_DIR}/edc/main_menu.edc
+#	${CMAKE_BINARY_DIR}/res
+#)
 
-EDJ_TARGET(main_menu.edj
-	${CMAKE_SOURCE_DIR}/edc/main_menu.edc
+#EDJ_TARGET(highscore_menu.edj
+#	${CMAKE_SOURCE_DIR}/edc/highscore_menu.edc
+#	${CMAKE_BINARY_DIR}/res
+#)
+
+EDJ_TARGET(memory_layouts.edj
+	${CMAKE_SOURCE_DIR}/edc/memory_layouts.edc
 	${CMAKE_BINARY_DIR}/res
 )

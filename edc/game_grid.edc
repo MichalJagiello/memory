@@ -1,4 +1,4 @@
-collections {
+
    group {
      name: "game_board_layout";
       parts {
@@ -36,7 +36,7 @@ collections {
             description {
               state: "default" 0.0;
                rel1.relative: 0.5 0.0;
-               rel2.relative: 1 0.1;
+               rel2.relative: 0.9 0.1;
             }
          } //part clock
          part {
@@ -44,8 +44,8 @@ collections {
             type: TABLE;
             description {
               state: "default" 0.0;
-               rel1.relative: 0.1 0.2;
-               rel2.relative: 0.9 0.8;
+               rel1.relative: 0.0 0.2;
+               rel2.relative: 1 0.8;
             }
          } //part game_board
          part {
@@ -54,9 +54,18 @@ collections {
             description {
               state: "default" 0.0;
                rel1.relative: 0.0 0.9;
-               rel2.relative: 1 1;
+               rel2.relative: 0.5 1;
             }
          } //part pause_btn
+         part {
+            name: "back_btn";
+            type: SWALLOW;
+            description {
+              state: "default" 0.0;
+               rel1.relative: 0.5 0.9;
+               rel2.relative: 1 1;
+            }
+         } //part back_btn
       }
    }
-}
+
