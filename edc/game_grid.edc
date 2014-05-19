@@ -1,6 +1,66 @@
 
    group {
-     name: "game_board_layout";
+     name: "game_board_classic_layout";
+      parts {
+        part {
+           name: "background";
+            type: RECT;
+            mouse_events: 0;
+            description {
+              state: "default" 0.0;
+               color: 179 179 179 255;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+            }
+         } //part bg
+         part {
+           name: "clock";
+            type: SWALLOW;
+            mouse_events: 0;
+            description {
+              state: "default" 0.0;
+               rel1.relative: 0.3 0.0;
+               rel2.relative: 0.7 0.1;
+            }
+         } //part clock
+         part {
+           name: "game_board";
+            type: TABLE;
+            description {
+              state: "default" 0.0;
+               rel1.relative: 0.0 0.2;
+               rel2.relative: 1 0.8;
+            }
+         } //part game_board
+         part {
+            name: "pause_btn";
+            type: SWALLOW;
+            description {
+              state: "default" 0.0;
+               rel1.relative: 0.0 0.9;
+               rel2.relative: 0.5 1;
+            }
+         } //part pause_btn
+         part {
+            name: "restart_btn";
+            type: SWALLOW;
+            description {
+              state: "default" 0.0;
+               rel1.relative: 0.5 0.9;
+               rel2.relative: 1 1;
+            }
+         } //part restart_btn
+      }
+   }
+
+group {
+     name: "game_board_arcade_layout";
       parts {
         part {
            name: "background";
@@ -58,14 +118,13 @@
             }
          } //part pause_btn
          part {
-            name: "back_btn";
+            name: "restart_btn";
             type: SWALLOW;
             description {
               state: "default" 0.0;
                rel1.relative: 0.5 0.9;
                rel2.relative: 1 1;
             }
-         } //part back_btn
+         } //part restart_btn
       }
    }
-

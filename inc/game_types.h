@@ -1,0 +1,15 @@
+
+#ifndef __GAME_TYPES__
+#define __GAME_TYPES__
+
+enum GameTypes
+{
+	CLASSIC_GAME_SMALL_GRID = 0,
+	CLASSIC_GAME_MEDIUM_GRID = 1,
+	CLASSIC_GAME_BIG_GRID = 2,
+	ARCADE_GAME = 3
+};
+
+#define ALL_RESULTS 40
+
+#endif

@@ -14,6 +14,7 @@ BuildRequires:  pkgconfig(eet)
 BuildRequires:  pkgconfig(edje)
 BuildRequires:  cmake
 BuildRequires:  libopenssl
+BuildRequires:  pkgconfig(efl-assist)
 
 %description
 Shortcut framework description

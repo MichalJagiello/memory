@@ -1,6 +1,8 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include "main.h"
+#include "game_types.h"
+#include <efl_assist.h>
 
 int check_result_file()
 {
@@ -16,17 +18,21 @@ int check_result_file()
 		{
 			return MEMORY_ERROR;
 		}
-		int i = 1;
-		for(; i <= 10; ++i)
+		int i = 0;
+		for(; i <= ARCADE_GAME; ++i)
 		{
 			char buf[5];
-			sprintf(buf, "%d", i);
-			int pom[3];
-			pom[0] = -1;
-			pom[1] = -1;
-			pom[2] = -1;
-			if(eet_write(eef, buf, pom, sizeof(pom)+1, 0) == 0)
-				return MEMORY_ERROR;
+			int j = 0;
+			for(; j < 10; ++j)
+			{
+				sprintf(buf, "%d%d", i, j);
+				int results[3];
+				results[0] = -1;
+				results[1] = -1;
+				results[2] = -1;
+				if(eet_write(eef, buf, results, sizeof(results)+1, 0) == 0)
+					return MEMORY_ERROR;
+			}
 		}
 		eet_close(eef);
 	}
@@ -38,6 +44,11 @@ _response_cb(void *data, Evas_Object *obj,
              void *event_info)
 {
    evas_object_hide(data);
+}
+
+void _close_cb(void *data, Evas_Object *obj, void *event_info)
+{
+	elm_exit();
 }
 
 static int _create_menu(void *data)
@@ -56,7 +67,10 @@ static int _create_menu(void *data)
     new_game_btn = elm_hoversel_add(win);
 	elm_object_text_set(new_game_btn, "New game");
 	elm_object_part_content_set(main_menu_layout, "new_game_btn", new_game_btn);
-	elm_hoversel_item_add(new_game_btn, "Normal", NULL, ELM_ICON_NONE, _show_classic_gg, win);
+	elm_hoversel_item_add(new_game_btn, "Classic - small", NULL, ELM_ICON_NONE, _show_classic_small_gg, win);
+	elm_hoversel_item_add(new_game_btn, "Classic - medium", NULL, ELM_ICON_NONE, _show_classic_medium_gg, win);
+	elm_hoversel_item_add(new_game_btn, "Classic - big", NULL, ELM_ICON_NONE, _show_classic_big_gg, win);
+	elm_hoversel_item_add(new_game_btn, "Arcade", NULL, ELM_ICON_NONE, _show_arcade_gg, win);
 
 	highscore_btn = elm_button_add(win);
 	elm_object_text_set(highscore_btn, "Highscores");
@@ -66,6 +80,10 @@ static int _create_menu(void *data)
 	settings_btn = elm_button_add(win);
 	elm_object_text_set(settings_btn, "Settings");
 	elm_object_part_content_set(main_menu_layout, "settings_btn", settings_btn);
+    evas_object_smart_callback_add(settings_btn, "clicked", _show_settings, NULL);
+    
+    ea_object_event_callback_add(win, EA_CALLBACK_BACK, _close_cb, NULL);
+
 	evas_object_show(main_menu_layout);
 	evas_object_show(win);
 	
@@ -105,10 +123,10 @@ int main(int argc, char **argv)
     ecore_init();
     ecore_evas_init();
 
-    log_domain = eina_log_domain_register("Notifier", EINA_COLOR_CYAN);
+    log_domain = eina_log_domain_register("eMemory", EINA_COLOR_CYAN);
 
     ops.data = NULL;
-    ret = appcore_efl_main("Notifier", &argc, &argv, &ops);
+    ret = appcore_efl_main("eMemory", &argc, &argv, &ops);
 
     ecore_main_loop_begin();
 

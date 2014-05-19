@@ -4,5 +4,6 @@ collections {
 	#include "game_grid.edc"
 	#include "highscore_menu.edc"
 	#include "main_menu.edc"
+	#include "settings.edc"
 
 }

@@ -18,6 +18,7 @@ pkg_check_modules(pkgs REQUIRED
 	ecore
 	eina
 	ecore-x
+	efl-assist
 )
 
 SET(PREFIX ${CMAKE_SOURCE_DIR})
