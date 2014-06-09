@@ -13,7 +13,7 @@
 #include "game_grid.h"
 #include "settings.h"
 
-#define RESULTS_FILE "~/results.eet"
+#define RESULTS_FILE "/home/app/memory/results.eet"
 
 #define THEME_BUTTON "/usr/apps/org.tizen.memory/res/button.edj"
 

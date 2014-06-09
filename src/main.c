@@ -7,14 +7,14 @@
 
 int check_result_file()
 {
-	Eet_File *eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
+	Eet_File *eef = eet_open(RESULTS_FILE, EET_FILE_MODE_READ);
 	if(eef)
 	{
 		eet_close(eef);
 	}
 	else
 	{
-		eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_WRITE);
+		eef = eet_open(RESULTS_FILE, EET_FILE_MODE_WRITE);
 		if(!eef)
 		{
 			return MEMORY_ERROR;

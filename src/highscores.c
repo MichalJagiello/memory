@@ -34,7 +34,7 @@ void _show_hs(void *data, Evas_Object *obj, void *event_info)
         _itc->func.del = NULL;
 	}
 
-	Eet_File *eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
+	Eet_File *eef = eet_open(RESULTS_FILE, EET_FILE_MODE_READ);
 	int game_type = (int)(uintptr_t)(data);
 	int j = 0;
 	for(; j < 10; ++j)

@@ -107,7 +107,6 @@ void _show_arcade_game_finish(Eina_Bool win)
 	Evas_Object *content = elm_entry_add(game_grid_window);
 	int h, m, s;
 	elm_clock_time_get(game_grid_clock, &h, &m, &s);
-	printf("%d\n", arcade_game_result);
 	//elm_clock_pause_set(game_grid_clock, EINA_TRUE);
 	ecore_timer_freeze(arcade_game_timer);
 	arcade_game_result += s + m*60;
@@ -132,10 +131,8 @@ void _show_arcade_game_finish(Eina_Bool win)
     //4. wyswietlic odpowiedni popup
 	if(win == EINA_TRUE)
 	{
-		printf("I won\n");
 		return;
 	}
-	printf("I lost\n");
 }
 
 Eina_Bool _arcade_timer_cb(void *data)
@@ -210,8 +207,7 @@ Eina_Bool _compare_results(int *arr, int h, int m, int s)
 
 int _check_result(h, m, s)
 {
-	Eet_File *results = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
-	if(results == NULL) printf("Dupa, null");
+	Eet_File *results = eet_open(RESULTS_FILE, EET_FILE_MODE_READ);
 	int *result = NULL;
 	int i = 1;
 	for(; i <= 10; ++i)
@@ -241,7 +237,7 @@ int _check_result(h, m, s)
 
 int _check_arcade_result(int scores)
 {
-	Eet_File *results = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
+	Eet_File *results = eet_open(RESULTS_FILE, EET_FILE_MODE_READ);
 	int *result = NULL;
 	int i = 1;
 	for(; i <= 10; ++i)
@@ -271,8 +267,7 @@ int _check_arcade_result(int scores)
 
 void _save_result(int pos, int h, int m, int s)
 {
-	Eet_File *eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ_WRITE);
-	if(eef == NULL) printf("Dupa, null");
+	Eet_File *eef = eet_open(RESULTS_FILE, EET_FILE_MODE_READ_WRITE);
 	int i;
 	int result[3] = {h, m, s};
 	int pom[3];
@@ -289,18 +284,18 @@ void _save_result(int pos, int h, int m, int s)
 			pom[0] = temp_res[0];
 			pom[1] = temp_res[1];
 			pom[2] = temp_res[2];
-			if(eet_write(eef, temp2, pom, sizeof(pom)+1, 1) == 0) printf("Failure\n");
+			eet_write(eef, temp2, pom, sizeof(pom)+1, 1);
 			free(temp_res);
 		}
 	}
 	sprintf(temp, "%d%d", game_type, pos);
-	if(eet_write(eef, temp, result, sizeof(pom)+1, 1) == 0) printf("Failure\n");
+	eet_write(eef, temp, result, sizeof(pom)+1, 1);
 	eet_close(eef);
 }
 
 void _save_arcade_result(int pos, int scores)
 {
-	Eet_File *eef = eet_open("/usr/apps/org.tizen.memory/res/results.eet", EET_FILE_MODE_READ_WRITE);
+	Eet_File *eef = eet_open(RESULTS_FILE, EET_FILE_MODE_READ_WRITE);
 	int i;
 	int result[3] = {scores, -1, -1};
 	int pom[3];
