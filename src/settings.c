@@ -1,9 +1,10 @@
 #include "settings.h"
 #include "game_types.h"
+#include <efl_assist.h>
 
 void _settings_reset_highscores_cb(void *data, Evas_Object *obj, void *event_info)
 {
-	Eet_File *eef = eet_open("results.eet", EET_FILE_MODE_WRITE);
+	Eet_File *eef = eet_open("~/results.eet", EET_FILE_MODE_WRITE);
 	if(!eef)
 	{
 		return;
@@ -52,12 +53,14 @@ void _show_settings(void *data, Evas_Object *obj, void *event_info)
 	elm_object_part_content_set(settings_layout, "reset_highscores_btn", settings_reset_highscores_btn);
 	evas_object_smart_callback_add(settings_reset_highscores_btn, "clicked", _settings_reset_highscores_cb, NULL);
 	
-	settings_back_btn = elm_button_add(settings_window);
+	/*settings_back_btn = elm_button_add(settings_window);
 	elm_object_text_set(settings_back_btn, "Back");
 	elm_object_part_content_set(settings_layout, "back_btn", settings_back_btn);
-	evas_object_smart_callback_add(settings_back_btn, "clicked", _settings_back_button_cb, NULL);
+	evas_object_smart_callback_add(settings_back_btn, "clicked", _settings_back_button_cb, NULL);*/
 	
 	evas_object_show(settings_layout);
 	evas_object_show(settings_window);
+	
+	ea_object_event_callback_add(settings_window, EA_CALLBACK_BACK, _settings_back_button_cb, NULL);
 }
 

@@ -1,26 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Manifest xmlns="http://schemas.tizen.org/2012/12/manifest">
-    <Id>FP4F89VZCE</Id>
-    <Version>0.0.1</Version>
-    <Type>C++App</Type>
-    <Author>Michał Jagiełło</Author>
-    <Requirements>
-        <Feature Name="http://tizen.org/feature/platform.native.api.version">2.2</Feature>
-    </Requirements>
-    <Apps>
-        <ApiVersion>2.2</ApiVersion>
-        <Privileges/>
-        <UiApp LaunchingHistoryVisible="True" Main="True" MenuIconVisible="True" Name="memory">
-            <UiScalability BaseScreenSize="Normal" CoordinateSystem="Logical" LogicalCoordinate="720"/>
-            <UiTheme SystemTheme="Default"/>
-            <DisplayNames>
-                <DisplayName Locale="eng-GB">memory</DisplayName>
-                <DisplayName Locale="pol-PL">memory</DisplayName>
-            </DisplayNames>
-            <Icons>
-                <Icon Section="MainMenu">mainmenu.png</Icon>
-            </Icons>
-            <LaunchConditions/>
-        </UiApp>
-    </Apps>
-</Manifest>
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" package="org.tizen.memory" version="0.0.1" install-location="internal-only">
+	<label>memory</label>
+	<author email="" href="www.samsung.com"></author>
+	<description>memory</description>
+	<ui-application appid="org.tizen.memory" exec="/usr/apps/org.tizen.memory/bin/memory" nodisplay="false" multiple="false" type="capp" taskmanage="true">
+		<label>memory</label>
+		<icon>/usr/apps/org.tizen.memory/res/icons/memory.png</icon>
+		<label xml:lang="en-us">memory</label>
+	</ui-application>
+</manifest>

@@ -1,4 +1,6 @@
 #include "highscores.h"
+#include "main.h"
+#include <efl_assist.h>
 
 //static int dispX, dispY;
 //static int app_x_size;
@@ -32,7 +34,7 @@ void _show_hs(void *data, Evas_Object *obj, void *event_info)
         _itc->func.del = NULL;
 	}
 
-	Eet_File *eef = eet_open("results.eet", EET_FILE_MODE_READ);
+	Eet_File *eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
 	int game_type = (int)(uintptr_t)(data);
 	int j = 0;
 	for(; j < 10; ++j)
@@ -64,27 +66,58 @@ void _show_highscores(void *data, Evas_Object *obj, void *event_info)
     elm_win_resize_object_add(highscores_window, highscores_layout);
 	elm_layout_file_set(highscores_layout, HIGHSCORES_LAYOUT, "highscore_layout");
     
-    highscores_toolbar = elm_toolbar_add(highscores_window);
-	elm_toolbar_shrink_mode_set(highscores_toolbar, ELM_TOOLBAR_SHRINK_EXPAND);
+    /*highscores_toolbar = elm_toolbar_add(highscores_window);
+	elm_toolbar_shrink_mode_set(highscores_toolbar, ELM_TOOLBAR_SHRINK_SCROLL);
     Elm_Object_Item *it = elm_toolbar_item_append(highscores_toolbar, NULL, "Classic - small grid", _show_hs, (int*)CLASSIC_GAME_SMALL_GRID);
     elm_toolbar_item_append(highscores_toolbar, NULL, "Classic - medium grid", _show_hs, (int*)CLASSIC_GAME_MEDIUM_GRID);
     elm_toolbar_item_append(highscores_toolbar, NULL, "Classic - big grid", _show_hs, (int*)CLASSIC_GAME_BIG_GRID);
     elm_toolbar_item_append(highscores_toolbar, NULL, "Arcade", _show_hs, (int*)ARCADE_GAME);
-    elm_toolbar_select_mode_set(highscores_toolbar, ELM_OBJECT_SELECT_MODE_ALWAYS);
-    elm_object_part_content_set(highscores_layout, "hs_toolbar", highscores_toolbar);
+    elm_toolbar_select_mode_set(highscores_toolbar, ELM_OBJECT_SELECT_MODE_ALWAYS);*/
+    Evas_Object *btn = elm_button_add(highscores_window);
+    evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+	evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
+	elm_object_text_set(btn, "Small");
+	evas_object_smart_callback_add(btn, "clicked", _show_hs, (int*)CLASSIC_GAME_SMALL_GRID);
+	elm_layout_table_pack(highscores_layout, "hs_toolbar", btn, 0, 0, 1, 1);
+	evas_object_show(btn);
+
+    btn = elm_button_add(highscores_window);
+    evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+	evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
+	elm_object_text_set(btn, "Normal");
+	evas_object_smart_callback_add(btn, "clicked", _show_hs, (int*)CLASSIC_GAME_MEDIUM_GRID);
+	elm_layout_table_pack(highscores_layout, "hs_toolbar", btn, 1, 0, 1, 1);
+	evas_object_show(btn);
+
+    btn = elm_button_add(highscores_window);
+    evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+	evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
+	elm_object_text_set(btn, "Big");
+	evas_object_smart_callback_add(btn, "clicked", _show_hs, (int*)CLASSIC_GAME_BIG_GRID);
+	elm_layout_table_pack(highscores_layout, "hs_toolbar", btn, 2, 0, 1, 1);
+	evas_object_show(btn);
+
+    btn = elm_button_add(highscores_window);
+    evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+	evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
+	elm_object_text_set(btn, "Arcade");
+	evas_object_smart_callback_add(btn, "clicked", _show_hs, (int*)ARCADE_GAME);
+	elm_layout_table_pack(highscores_layout, "hs_toolbar", btn, 3, 0, 1, 1);
+	evas_object_show(btn);
     
     highscores_genlist = elm_genlist_add(highscores_window);
     elm_object_part_content_set(highscores_layout, "list", highscores_genlist);
 
-	highscores_back_button = elm_button_add(highscores_window);
-	elm_object_text_set(highscores_back_button, "Back");
-	elm_object_part_content_set(highscores_layout, "back_button", highscores_back_button);
-    evas_object_smart_callback_add(highscores_back_button, "clicked", _highscores_back_button_cb, NULL);
+	Evas_Object *reset_btn = elm_button_add(highscores_window);
+	elm_object_text_set(reset_btn, "Reset highscores");
+	elm_object_part_content_set(highscores_layout, "reset_button", reset_btn);
+    evas_object_smart_callback_add(reset_btn, "clicked", _highscores_back_button_cb, NULL);
     
     evas_object_show(highscores_layout);
     evas_object_show(highscores_window);
-    elm_toolbar_item_selected_set(it, EINA_TRUE);
+    //elm_toolbar_item_selected_set(it, EINA_TRUE);
+	ea_object_event_callback_add(highscores_window, EA_CALLBACK_BACK, _highscores_back_button_cb, NULL);
    
-	_show_hs((int*)CLASSIC_GAME_SMALL_GRID, highscores_toolbar, it);
+	//_show_hs((int*)CLASSIC_GAME_SMALL_GRID, highscores_toolbar, it);
 	
 }

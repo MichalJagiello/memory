@@ -210,7 +210,8 @@ Eina_Bool _compare_results(int *arr, int h, int m, int s)
 
 int _check_result(h, m, s)
 {
-	Eet_File *results = eet_open("results.eet", EET_FILE_MODE_READ);
+	Eet_File *results = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
+	if(results == NULL) printf("Dupa, null");
 	int *result = NULL;
 	int i = 1;
 	for(; i <= 10; ++i)
@@ -240,7 +241,7 @@ int _check_result(h, m, s)
 
 int _check_arcade_result(int scores)
 {
-	Eet_File *results = eet_open("results.eet", EET_FILE_MODE_READ);
+	Eet_File *results = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ);
 	int *result = NULL;
 	int i = 1;
 	for(; i <= 10; ++i)
@@ -270,7 +271,8 @@ int _check_arcade_result(int scores)
 
 void _save_result(int pos, int h, int m, int s)
 {
-	Eet_File *eef = eet_open("results.eet", EET_FILE_MODE_READ_WRITE);
+	Eet_File *eef = eet_open("/home/app/memory/results.eet", EET_FILE_MODE_READ_WRITE);
+	if(eef == NULL) printf("Dupa, null");
 	int i;
 	int result[3] = {h, m, s};
 	int pom[3];
@@ -287,18 +289,18 @@ void _save_result(int pos, int h, int m, int s)
 			pom[0] = temp_res[0];
 			pom[1] = temp_res[1];
 			pom[2] = temp_res[2];
-			eet_write(eef, temp2, pom, sizeof(pom)+1, 1);
+			if(eet_write(eef, temp2, pom, sizeof(pom)+1, 1) == 0) printf("Failure\n");
 			free(temp_res);
 		}
 	}
 	sprintf(temp, "%d%d", game_type, pos);
-	eet_write(eef, temp, result, sizeof(pom)+1, 1);
+	if(eet_write(eef, temp, result, sizeof(pom)+1, 1) == 0) printf("Failure\n");
 	eet_close(eef);
 }
 
 void _save_arcade_result(int pos, int scores)
 {
-	Eet_File *eef = eet_open("results.eet", EET_FILE_MODE_READ_WRITE);
+	Eet_File *eef = eet_open("/usr/apps/org.tizen.memory/res/results.eet", EET_FILE_MODE_READ_WRITE);
 	int i;
 	int result[3] = {scores, -1, -1};
 	int pom[3];
@@ -469,7 +471,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 2; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -495,7 +497,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 2; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -521,7 +523,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 3; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -547,7 +549,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 4; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -573,7 +575,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 4; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -599,7 +601,7 @@ void _on_game_finish_arcade()
 			for(j = 0; j < 4; ++j)
 			{
 				Evas_Object *btn = elm_button_add(game_grid_window);
-				elm_object_style_set(btn, "game_grid");
+				//elm_object_style_set(btn, "game_grid");
 				evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 				evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 				important_list = create_game_button(btn, important_list);
@@ -666,7 +668,7 @@ void _prepare_grid(int rows, int cols, int cards)
 		for(j = 0; j < cols; ++j)
 		{
 			Evas_Object *btn = elm_button_add(game_grid_window);
-			elm_object_style_set(btn, "game_grid");
+			//elm_object_style_set(btn, "game_grid2");
 			evas_object_size_hint_weight_set(btn, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 			evas_object_size_hint_align_set(btn, EVAS_HINT_FILL, EVAS_HINT_FILL);
 			important_list = create_game_button(btn, important_list);

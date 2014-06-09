@@ -36,7 +36,7 @@ group {
                rel2.relative: 0.8 0.6;
             }
          } //part_reset_highscores
-         part {
+         /*part {
             name: "back_btn";
             type: SWALLOW;
             description {
@@ -44,6 +44,6 @@ group {
                rel1.relative: 0.2 0.7;
                rel2.relative: 0.8 0.9;
             }
-         } //part back_btn
+         } *///part back_btn
       }
    }

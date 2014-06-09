@@ -51,3 +51,8 @@ EDJ_TARGET(memory_layouts.edj
 	${CMAKE_SOURCE_DIR}/edc/memory_layouts.edc
 	${CMAKE_BINARY_DIR}/res
 )
+
+EDJ_TARGET(button.edj
+	${CMAKE_SOURCE_DIR}/edc/button.edc
+	${CMAKE_BINARY_DIR}/res
+)

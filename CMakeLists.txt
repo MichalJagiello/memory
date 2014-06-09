@@ -12,6 +12,7 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/edc)
 INCLUDE(FindPkgConfig)
 pkg_check_modules(pkgs REQUIRED
 	bundle
+	capi-appfw-application
 	appcore-efl
 	evas
 	elementary
@@ -54,6 +55,7 @@ ADD_SUBDIRECTORY(edc)
 # Install 
 INSTALL(TARGETS ${PROJECT_NAME} DESTINATION bin)
 INSTALL(DIRECTORY ${RESDIR}/icons DESTINATION res)
+INSTALL(FILES ${RESDIR}/results.eet DESTINATION res)
 INSTALL(DIRECTORY ${RESDIR}/images DESTINATION res)
 # Install Manifest File
 INSTALL(FILES org.tizen.memory.xml DESTINATION /opt/share/packages)

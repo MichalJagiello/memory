@@ -21,7 +21,7 @@
          } //part bg
          part {
             name: "hs_toolbar";
-            type: SWALLOW;
+            type: TABLE;
             description {
               state: "default" 0.0;
                rel1.relative: 0.0 0.0;
@@ -39,7 +39,7 @@
             }
          } //part list
          part {
-           name: "back_button";
+           name: "reset_button";
             type: SWALLOW;
             description {
               state: "default" 0.0;
@@ -47,7 +47,7 @@
                rel1.relative: 0.0 0.85;
                rel2.relative: 1.0 1.0;
             }
-         } //back_button
+         } //reset_button
       }
    }
 
